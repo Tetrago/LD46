@@ -4,6 +4,7 @@ using UnityEngine;
 public class Drip : MonoBehaviour
 {
     public Animator animator_;
+    public SpriteRenderer renderer_;
 
     public Vector2 maxMovement_;
     public float minimumDistance_;
@@ -60,6 +61,7 @@ public class Drip : MonoBehaviour
         while(move.magnitude < minimumDistance_);
 
         destination_ = transform.position + move;
+        renderer_.flipX = move.x > 0;
 
         yield return new WaitForSeconds(moveFrequency_);
         StartCoroutine(PickNewDestination());
