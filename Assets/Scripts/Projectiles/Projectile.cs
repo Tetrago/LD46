@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public abstract class Projectile : MonoBehaviour
 {
     public SpriteRenderer renderer_;
 
@@ -25,14 +25,10 @@ public class Projectile : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = dir * speed_;
     }
 
+    protected abstract void Hit(Collider2D collision);
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Fire fire = collision.GetComponent<Fire>();
-        if(fire != null)
-        {
-            fire.Hit();
-            Sound.Instance.Play(transform.position, Resources.Load<AudioClip>("Hit"));
-            Destroy(gameObject);
-        }
+        Hit(collision);
     }
 }

@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     public Camera camera_;
     public GameObject cursor_;
     public GameObject highligher_;
+    public GameObject shield_;
     public GameObject drip_;
     public GameObject dropProjectile_;
 
@@ -23,16 +24,20 @@ public class PlayerController : MonoBehaviour
         cursor_ = Instantiate(cursor_);
         cursorRenderer_ = cursor_.GetComponent<SpriteRenderer>();
 
-        highligher_ = Instantiate(highligher_);
+        highligher_ = Instantiate(highligher_, transform);
         highlighterRenderer_ = highligher_.GetComponent<SpriteRenderer>();
+
+        shield_ = Instantiate(shield_, transform);
     }
 
     private void Update()
     {
         Fire();
         Move();
+
         UpdateCursor();
         UpdateHighlighter();
+        UpdateShield();
     }
 
     private void Fire()
@@ -78,10 +83,14 @@ public class PlayerController : MonoBehaviour
         Vector3 diff = drip_.transform.position - transform.position;
 
         highligher_.transform.rotation = Util.LookAt(diff);
-        highligher_.transform.position = transform.position;
 
         Color col = highlighterRenderer_.color;
         col.a = Mathf.Min(Vector3.Distance(drip_.transform.position, transform.position) / highlighterFadeDistance_, 1);
         highlighterRenderer_.color = col;
+    }
+
+    private void UpdateShield()
+    {
+        shield_.transform.rotation = Util.LookAt(camera_.ScreenToWorldPoint(Input.mousePosition) - transform.position);
     }
 }

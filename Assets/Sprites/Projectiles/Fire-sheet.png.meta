@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: 2d76af124e22925488251afe3d85d879
+guid: d1d95ee42645f734f8c32b97e322ccdd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6530179738444782934
-    second: sheet_0
+      213: -2272667111879376274
+    second: Fire-sheet_0
   - first:
-      213: 613435604629981061
-    second: sheet_1
+      213: 4884018514234696779
+    second: Fire-sheet_1
   - first:
-      213: -3656531271222932061
-    second: sheet_2
+      213: 5603782898596002642
+    second: Fire-sheet_2
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -95,7 +95,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sheet_0
+      name: Fire-sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -109,14 +109,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c39cbe7425f6d5488b61c10d0daf70b
-      internalID: 6530179738444782934
+      spriteID: 41b17b9defc033e44990f4d42accf827
+      internalID: -2272667111879376274
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sheet_1
+      name: Fire-sheet_1
       rect:
         serializedVersion: 2
         x: 32
@@ -130,14 +130,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b41dd6624bbb30448b80f02264469a94
-      internalID: 613435604629981061
+      spriteID: b7007ed3d1b2c6944910739d5cf3afde
+      internalID: 4884018514234696779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sheet_2
+      name: Fire-sheet_2
       rect:
         serializedVersion: 2
         x: 64
@@ -151,8 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88b9d7da0fea58349808067b18333278
-      internalID: -3656531271222932061
+      spriteID: 772409e2a872a4a41bb884551a762729
+      internalID: 5603782898596002642
       vertices: []
       indices: 
       edges: []

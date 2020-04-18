@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Drip
   - Enemy
-  - Flame
+  - Safe
   layers:
   - Default
   - TransparentFX

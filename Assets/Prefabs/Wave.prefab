@@ -43,9 +43,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028f9bbc7248b7a4ea5bf8855b4cf92f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera_: {fileID: 0}
   drip_: {fileID: 0}
   details_:
   - name: Flame
+    prefab: {fileID: 3204948848884821846, guid: ef2d834a83887f742ad246e43fc8b788,
+      type: 3}
+    startingWave: 5
+    baseRange: 15
+    baseCount: 1
+  - name: Fireball
     prefab: {fileID: 3165986950434985915, guid: 5a831fc1ae2961442ad4bc60d5ae34b4,
       type: 3}
     startingWave: 0
@@ -54,3 +61,5 @@ MonoBehaviour:
   difficultyIncrease_: 0.2
   text_: {fileID: 0}
   safeDistance_: 3
+  waitTime_: 0
+  waitBar_: {fileID: 0}

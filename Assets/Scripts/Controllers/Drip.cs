@@ -51,8 +51,12 @@ public class Drip : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        animator_.SetBool("isAlive", false);
-        enabled = false;
+        if(!collision.collider.CompareTag("Safe"))
+        {
+            animator_.SetBool("isAlive", false);
+            enabled = false;
+            Destroy(collision.gameObject);
+        }
     }
 
     private IEnumerator PickNewDestination()
