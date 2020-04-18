@@ -10,6 +10,7 @@ public class Drip : MonoBehaviour
     public float minimumDistance_;
     public float moveFrequency_;
     public float moveSpeed_;
+    public float maxSpeed_;
     public float stopRange_;
 
     private Vector3 destination_;
@@ -35,8 +36,8 @@ public class Drip : MonoBehaviour
     private void Move()
     {
         transform.position = new Vector3(
-            Mathf.SmoothStep(transform.position.x, destination_.x, moveSpeed_ * Time.deltaTime),
-            Mathf.SmoothStep(transform.position.y, destination_.y, moveSpeed_ * Time.deltaTime),
+            Mathf.Min(maxSpeed_, Mathf.SmoothStep(transform.position.x, destination_.x, moveSpeed_ * Time.deltaTime)),
+            Mathf.Min(maxSpeed_, Mathf.SmoothStep(transform.position.y, destination_.y, moveSpeed_ * Time.deltaTime)),
             transform.position.z);
     }
 
@@ -47,6 +48,12 @@ public class Drip : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(destination_, 0.1f);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        animator_.SetBool("isAlive", false);
+        enabled = false;
     }
 
     private IEnumerator PickNewDestination()
@@ -61,7 +68,7 @@ public class Drip : MonoBehaviour
         while(move.magnitude < minimumDistance_);
 
         destination_ = transform.position + move;
-        renderer_.flipX = move.x > 0;
+        renderer_.flipX = move.x < 0;
 
         yield return new WaitForSeconds(moveFrequency_);
         StartCoroutine(PickNewDestination());

@@ -46,10 +46,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera_: {fileID: 0}
-  cursor_: {fileID: 0}
-  highligher_: {fileID: 0}
+  cursor_: {fileID: 5620374597096951064, guid: 2bee1fffa89bff248895e48e00ab2e17, type: 3}
+  highligher_: {fileID: 4825756028563551191, guid: 4f0c7c7b1f9a07c47941d212237a21c2,
+    type: 3}
   drip_: {fileID: 0}
+  dropProjectile_: {fileID: 5799358578912448303, guid: 524c1a8d8c0848b42b95520e9c744aa5,
+    type: 3}
   moveSpeed_: 3
+  shootTime_: 0.35
 --- !u!1 &123579566978369497
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +113,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.73
-  m_PointLightOuterRadius: 3.96
+  m_PointLightOuterRadius: 1.75
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5

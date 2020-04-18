@@ -44,7 +44,7 @@ public class Floor : MonoBehaviour
 
                 if(!tiles_.ContainsKey(loc) && Vector3.Distance(pos, loc) < range_)
                 {
-                    tiles_[loc] = (GameObject)Instantiate(tile_, loc, Quaternion.identity, container_.transform);
+                    tiles_[loc] = Instantiate(tile_, loc, Quaternion.identity, container_.transform);
                 }
             }
         }
