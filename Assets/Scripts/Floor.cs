@@ -3,17 +3,22 @@ using UnityEngine;
 
 public class Floor : MonoBehaviour
 {
-    public GameObject tile_;
-    public float range_;
+    public Sprite[] sprites_;
+    public GameObject sprite_;
     public float zValue_;
 
     private Dictionary<Vector3, GameObject> tiles_;
     private GameObject container_;
 
+    private float range_;
+
     private void Awake()
     {
         tiles_ = new Dictionary<Vector3, GameObject>();
         container_ = new GameObject("Tiles");
+
+        Vector2 size = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 10));
+        range_ = Mathf.Max(size.x, size.y) * 2;
     }
 
     private void Update()
@@ -44,7 +49,8 @@ public class Floor : MonoBehaviour
 
                 if(!tiles_.ContainsKey(loc) && Vector3.Distance(pos, loc) < range_)
                 {
-                    tiles_[loc] = Instantiate(tile_, loc, Quaternion.identity, container_.transform);
+                    tiles_[loc] = Instantiate(sprite_, loc, Quaternion.identity, container_.transform);
+                    tiles_[loc].GetComponent<SpriteRenderer>().sprite = sprites_[Random.Range(0, sprites_.Length)];
                 }
             }
         }

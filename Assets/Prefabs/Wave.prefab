@@ -53,3 +53,4 @@ MonoBehaviour:
     baseCount: 2
   difficultyIncrease_: 0.2
   text_: {fileID: 0}
+  safeDistance_: 3

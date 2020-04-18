@@ -17,7 +17,7 @@ public class WaveSpawner : MonoBehaviour
         ++waveCounter_;
         difficultyFactor_ += difficultyIncrease_ * difficultyFactor_;
 
-        text_.text = string.Format("Wave {0} Difficulty {1}", waveCounter_, difficultyFactor_);
+        text_.text = string.Format("{0:00}", waveCounter_);
 
         foreach(EnemyDetail enemy in details_)
         {
@@ -25,13 +25,8 @@ public class WaveSpawner : MonoBehaviour
 
             for(float i = 0; i < enemy.baseCount * difficultyFactor_; ++i)
             {
-                Vector2 pos;
-                do
-                {
-                    pos = Random.onUnitSphere * enemy.baseRange * difficultyFactor_ + drip_.transform.position;
-                    Instantiate(enemy.prefab, pos, Quaternion.identity, transform).name = enemy.name;
-                }
-                while(Vector2.Distance(pos, drip_.transform.position) < safeDistance_);
+                Vector2 pos = Random.onUnitSphere * Random.Range(safeDistance_, enemy.baseRange) * difficultyFactor_ + drip_.transform.position;
+                Instantiate(enemy.prefab, pos, Quaternion.identity, transform).name = enemy.name;
             }
         }
     }
