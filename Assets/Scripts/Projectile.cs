@@ -19,7 +19,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void Shoot(Vector3 dir)
+    public void Shoot(Vector2 dir)
     {
         transform.rotation = Util.LookAt(dir);
         GetComponent<Rigidbody2D>().velocity = dir * speed_;

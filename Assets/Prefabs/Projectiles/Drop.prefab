@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderer_: {fileID: 5799358579244862506}
-  speed_: 35
+  speed_: 10
   decay_: 0.1
 --- !u!1 &5799358579244862511
 GameObject:

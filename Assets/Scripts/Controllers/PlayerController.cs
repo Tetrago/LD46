@@ -41,9 +41,10 @@ public class PlayerController : MonoBehaviour
         {
             Sound.Instance.Play(transform.position, Resources.Load<AudioClip>("Shoot"));
 
+            Vector2 dir = camera_.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             Instantiate(dropProjectile_, transform.position, Quaternion.identity)
                 .GetComponent<Projectile>()
-                .Shoot((camera_.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized);
+                .Shoot(dir.normalized);
 
             lastShot_ = Time.time;
         }
