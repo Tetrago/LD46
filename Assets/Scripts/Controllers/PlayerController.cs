@@ -10,15 +10,21 @@ public class PlayerController : MonoBehaviour
 
     public float moveSpeed_;
     public float shootTime_;
+    public float highlighterFadeDistance_;
 
     private SpriteRenderer cursorRenderer_;
+    private SpriteRenderer highlighterRenderer_;
     private float lastShot_;
 
     private void Awake()
     {
+        Cursor.visible = false;
+
         cursor_ = Instantiate(cursor_);
-        highligher_ = Instantiate(highligher_);
         cursorRenderer_ = cursor_.GetComponent<SpriteRenderer>();
+
+        highligher_ = Instantiate(highligher_);
+        highlighterRenderer_ = highligher_.GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -31,15 +37,15 @@ public class PlayerController : MonoBehaviour
 
     private void Fire()
     {
-        if(Input.GetMouseButton(0))
+        if(Input.GetMouseButton(0) && lastShot_ <= Time.time - shootTime_)
         {
-            if(lastShot_ <= Time.time - shootTime_)
-            {
-                Sound.Instance.Play(transform.position, Resources.Load<AudioClip>("Shoot"));
-                GameObject proj = Instantiate(dropProjectile_, transform.position, Quaternion.identity);
-                proj.GetComponent<Projectile>().Shoot(camera_.ScreenToWorldPoint(Input.mousePosition) - transform.position);
-                lastShot_ = Time.time;
-            }
+            Sound.Instance.Play(transform.position, Resources.Load<AudioClip>("Shoot"));
+
+            Instantiate(dropProjectile_, transform.position, Quaternion.identity)
+                .GetComponent<Projectile>()
+                .Shoot((camera_.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized);
+
+            lastShot_ = Time.time;
         }
     }
 
@@ -72,5 +78,9 @@ public class PlayerController : MonoBehaviour
 
         highligher_.transform.rotation = Util.LookAt(diff);
         highligher_.transform.position = transform.position;
+
+        Color col = highlighterRenderer_.color;
+        col.a = Mathf.Min(Vector3.Distance(drip_.transform.position, transform.position) / highlighterFadeDistance_, 1);
+        highlighterRenderer_.color = col;
     }
 }

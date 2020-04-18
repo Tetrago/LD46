@@ -15,6 +15,6 @@ public class Walk : MonoBehaviour
     private void Update()
     {
         Vector2 move = drip_.transform.position - transform.position;
-        transform.Translate(move * moveSpeed_ * Time.deltaTime);
+        transform.Translate(move.normalized * moveSpeed_ * Time.deltaTime);
     }
 }

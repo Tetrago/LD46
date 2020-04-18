@@ -10,7 +10,6 @@ public class Drip : MonoBehaviour
     public float minimumDistance_;
     public float moveFrequency_;
     public float moveSpeed_;
-    public float maxSpeed_;
     public float stopRange_;
 
     private Vector3 destination_;
@@ -36,8 +35,8 @@ public class Drip : MonoBehaviour
     private void Move()
     {
         transform.position = new Vector3(
-            Mathf.Min(maxSpeed_, Mathf.SmoothStep(transform.position.x, destination_.x, moveSpeed_ * Time.deltaTime)),
-            Mathf.Min(maxSpeed_, Mathf.SmoothStep(transform.position.y, destination_.y, moveSpeed_ * Time.deltaTime)),
+            Mathf.SmoothStep(transform.position.x, destination_.x, moveSpeed_ * Time.deltaTime),
+            Mathf.SmoothStep(transform.position.y, destination_.y, moveSpeed_ * Time.deltaTime),
             transform.position.z);
     }
 
@@ -58,6 +57,8 @@ public class Drip : MonoBehaviour
 
     private IEnumerator PickNewDestination()
     {
+        yield return new WaitForSeconds(moveFrequency_);
+
         Vector3 move;
         do
         {
@@ -70,7 +71,6 @@ public class Drip : MonoBehaviour
         destination_ = transform.position + move;
         renderer_.flipX = move.x < 0;
 
-        yield return new WaitForSeconds(moveFrequency_);
         StartCoroutine(PickNewDestination());
     }
 }

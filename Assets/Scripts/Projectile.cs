@@ -22,7 +22,7 @@ public class Projectile : MonoBehaviour
     public void Shoot(Vector3 dir)
     {
         transform.rotation = Util.LookAt(dir);
-        GetComponent<Rigidbody2D>().velocity = dir.normalized * speed_;
+        GetComponent<Rigidbody2D>().velocity = dir * speed_;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

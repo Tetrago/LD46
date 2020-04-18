@@ -54,6 +54,7 @@ MonoBehaviour:
     type: 3}
   moveSpeed_: 3
   shootTime_: 0.35
+  highlighterFadeDistance_: 10
 --- !u!1 &123579566978369497
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,7 +199,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 6530179738444782934, guid: 2d76af124e22925488251afe3d85d879,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -2,6 +2,8 @@
 
 public class Sound : MonoBehaviour
 {
+    public const int POOL_SIZE = 5;
+
     public static Sound Instance
     {
         get
@@ -17,17 +19,31 @@ public class Sound : MonoBehaviour
 
     private static Sound instance_;
 
-    private AudioSource audio_;
+    private AudioSource[] audio_;
 
     private void Awake()
     {
-        audio_ = gameObject.AddComponent<AudioSource>();
+        audio_ = new AudioSource[POOL_SIZE];
+
+        for(int i = 0; i < POOL_SIZE; ++i)
+        {
+            audio_[i] = new GameObject("Audio").AddComponent<AudioSource>();
+            audio_[i].transform.parent = transform;
+        }
     }
 
     public void Play(Vector3 pos, AudioClip clip)
     {
-        transform.position = pos;
-        audio_.clip = clip;
-        audio_.Play();
+        foreach(AudioSource source in audio_)
+        {
+            if(!source.isPlaying)
+            {
+                source.clip = clip;
+                source.transform.position = pos;
+                source.Play();
+
+                return;
+            }
+        }
     }
 }

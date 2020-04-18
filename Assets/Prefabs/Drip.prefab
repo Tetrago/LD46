@@ -48,11 +48,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator_: {fileID: 4491997335140672119}
   renderer_: {fileID: 4491997335140672116}
-  maxMovement_: {x: 3, y: 3}
+  maxMovement_: {x: 5, y: 5}
   minimumDistance_: 1
-  moveFrequency_: 3
-  moveSpeed_: 4
-  maxSpeed_: 3
+  moveFrequency_: 4
+  moveSpeed_: 3
   stopRange_: 0.8
 --- !u!61 &842469354837386999
 BoxCollider2D:
