@@ -25,7 +25,7 @@ public class WaveSpawner : MonoBehaviour
 
             for(float i = 0; i < enemy.baseCount * difficultyFactor_; ++i)
             {
-                Vector2 pos = Random.onUnitSphere * Random.Range(safeDistance_, enemy.baseRange) * difficultyFactor_ + drip_.transform.position;
+                Vector2 pos = Random.insideUnitCircle.normalized * Random.Range(safeDistance_, enemy.baseRange) * difficultyFactor_ + new Vector2(drip_.transform.position.x, drip_.transform.position.y);
                 Instantiate(enemy.prefab, pos, Quaternion.identity, transform).name = enemy.name;
             }
         }
