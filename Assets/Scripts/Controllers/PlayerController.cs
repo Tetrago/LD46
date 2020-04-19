@@ -16,13 +16,17 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer cursorRenderer_;
     private SpriteRenderer highlighterRenderer_;
     private float lastShot_;
+    private SpriteRenderer enemyHighlighter_;
 
     private void Awake()
     {
         Cursor.visible = false;
 
         cursor_ = Instantiate(cursor_);
-        cursorRenderer_ = cursor_.GetComponent<SpriteRenderer>();
+        cursorRenderer_ = cursor_.GetComponentInChildren<SpriteRenderer>();
+
+        enemyHighlighter_ = Instantiate(highligher_, transform).GetComponent<SpriteRenderer>();
+        enemyHighlighter_.color = Color.red;
 
         highligher_ = Instantiate(highligher_, transform);
         highlighterRenderer_ = highligher_.GetComponent<SpriteRenderer>();
@@ -80,6 +84,22 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateHighlighter()
     {
+        GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
+        if(enemy != null)
+        {
+            enemyHighlighter_.transform.rotation = Util.LookAt(enemy.transform.position - transform.position);
+
+            Color color = enemyHighlighter_.color;
+            color.a = Mathf.Min(Vector3.Distance(enemy.transform.position, transform.position) / highlighterFadeDistance_, 1);
+            enemyHighlighter_.color = color;
+        }
+        else
+        {
+            Color color = enemyHighlighter_.color;
+            color.a = 0;
+            enemyHighlighter_.color = color;
+        }
+
         Vector3 diff = drip_.transform.position - transform.position;
 
         highligher_.transform.rotation = Util.LookAt(diff);

@@ -9,6 +9,10 @@ public class DropProjectile : Projectile
         {
             fire.Hit();
             Sound.Instance.Play(transform.position, Resources.Load<AudioClip>("Hit"));
+        }
+
+        if(collision.CompareTag("Enemy"))
+        {
             Destroy(gameObject);
         }
     }

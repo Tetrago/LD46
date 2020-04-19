@@ -31,6 +31,8 @@ public class Ranged : MonoBehaviour
                 .GetComponent<Projectile>()
                 .Shoot(dir.normalized);
 
+            Sound.Instance.Play(transform.position, Resources.Load<AudioClip>("Shoot"));
+
             lastShot_ = Time.time;
         }
 
