@@ -5,6 +5,9 @@ public class Drip : MonoBehaviour
 {
     public Animator animator_;
     public SpriteRenderer renderer_;
+    public CameraFollower camera_;
+    public Fade fade_;
+    public GameObject light_;
 
     public Vector2 maxMovement_;
     public float minimumDistance_;
@@ -13,6 +16,12 @@ public class Drip : MonoBehaviour
     public float stopRange_;
 
     private Vector3 destination_;
+    private bool alive_;
+
+    private void Awake()
+    {
+        alive_ = true;
+    }
 
     private void Start()
     {
@@ -34,6 +43,8 @@ public class Drip : MonoBehaviour
 
     private void Move()
     {
+        if(!alive_) return;
+
         transform.position = new Vector3(
             Mathf.SmoothStep(transform.position.x, destination_.x, moveSpeed_ * Time.deltaTime),
             Mathf.SmoothStep(transform.position.y, destination_.y, moveSpeed_ * Time.deltaTime),
@@ -49,13 +60,20 @@ public class Drip : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!collision.collider.CompareTag("Safe"))
+        if(!collision.CompareTag("Safe"))
         {
-            animator_.SetBool("isAlive", false);
-            enabled = false;
             Destroy(collision.gameObject);
+            Sound.Instance.Play(transform.position, Resources.Load<AudioClip>("Hit"));
+
+            if(alive_)
+            {
+                animator_.SetBool("isAlive", false);
+                alive_ = false;
+
+                StartCoroutine(GameEnd());
+            }
         }
     }
 
@@ -76,5 +94,17 @@ public class Drip : MonoBehaviour
         renderer_.flipX = move.x < 0;
 
         StartCoroutine(PickNewDestination());
+    }
+
+    private IEnumerator GameEnd()
+    {
+        camera_.target_ = transform;
+        light_.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(5);
+
+        Cursor.visible = true;
+        EndGame.score_ = WaveSpawner.waveCounter_;
+        fade_.ChangeScene(2);
     }
 }

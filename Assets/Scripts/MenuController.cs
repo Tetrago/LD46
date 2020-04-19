@@ -13,4 +13,10 @@ public class MenuController : MonoBehaviour
         Sound.Instance.Play(Vector3.zero, Resources.Load<AudioClip>("Blip"));
         Application.Quit();
     }
+
+    public void OnMusic(bool toggle)
+    {
+        Sound.Instance.Play(Vector3.zero, Resources.Load<AudioClip>("Blip"));
+        Music.playMusic_ = toggle;
+    }
 }

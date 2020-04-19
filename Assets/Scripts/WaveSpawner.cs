@@ -47,7 +47,7 @@ public class WaveSpawner : MonoBehaviour
     {
         if(lastWait_ != -1)
         {
-            SetBar((Time.time - lastWait_) / (waitTime_ - difficultyIncrease_ * difficultyFactor_) * Screen.width * 2);
+            SetBar((Time.time - lastWait_) / (waitTime_ - difficultyIncrease_ * difficultyFactor_));
         }
         else
         {
@@ -65,9 +65,9 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
-    private void SetBar(float size)
+    private void SetBar(float amount)
     {
-        waitBar_.rectTransform.sizeDelta = new Vector2(size, waitBar_.rectTransform.sizeDelta.y);
+        waitBar_.fillAmount = amount;
     }
 
     [System.Serializable]
